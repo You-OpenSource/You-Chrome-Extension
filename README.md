@@ -1,6 +1,6 @@
 # You-Chrome-Extension
 
-This Chrome extension sets [you.com](https://you.com/) as your default search engine. Because we believe that users deserve control over their search experience, it also allows you to switch your default search engine between [You.com](https://you.com/), [YouCode](https://code.you.com/) (search engine designed for developers), Google and DuckDuckGo with one click.
+This Chrome extension sets [you.com](https://you.com/) as your default search engine. Because we believe that users deserve control over their search experience, the extension also allows you to switch your default search engine between [You.com](https://you.com/), [YouCode](https://code.you.com/) (search engine designed for developers), Google and DuckDuckGo with one click.
 
 ## Use Extension:
 
