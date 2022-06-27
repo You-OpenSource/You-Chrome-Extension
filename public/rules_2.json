@@ -1,0 +1,18 @@
+[
+{
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://you.com/search?q=\\1&fromExtension=true"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https://you\\.com/default/search\\?q=(.*)",
+      "resourceTypes": [
+        "main_frame"
+      ]
+    }
+  }
+]
