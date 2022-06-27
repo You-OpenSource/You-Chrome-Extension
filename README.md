@@ -2,12 +2,13 @@
 
 This Chrome extension sets [you.com](https://you.com/) as your default search engine. Because we believe that users deserve control over their search experience, it also allows you to switch your default search engine between [You.com](https://you.com/), [YouCode](https://code.you.com/) (search engine designed for developers), Google and DuckDuckGo with one click.
 
-**Use Extension:**
+## Use Extension:
+
 Download extension in the Chrome web store: https://chrome.google.com/webstore/detail/youcom-multi-engine-searc/fhplnehgjpmohhldfnjhibanpbiedofi
 
 ![Extension](extension_image.png?raw=true)
 
-**Development Setup:**
+### **Development Setup:**
 
 1. Download or clone this repo into a separate folder
 2. `run npm install && npm run build`
