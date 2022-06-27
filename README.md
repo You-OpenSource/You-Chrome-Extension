@@ -11,7 +11,7 @@ Download extension in the Chrome web store: https://chrome.google.com/webstore/d
 ### **Development Setup:**
 
 1. Download or clone this repo into a separate folder
-2. `run npm install && npm run build`
+2. run `npm install && npm run build`
 3. Go to **chrome://extensions** in the Chrome address bar 
 4. At the top right, turn on **Developer mode**
 5. Click **Load unpacked**
