@@ -18,8 +18,10 @@ export const AppHeader = styled.header`
   background-repeat: no-repeat;
 `;
 
-export const YouLogoContainer = styled.div`
+export const YouLogoContainer = styled.img`
   padding: ${spacing.md} 0;
+  height: 24px;
+  width: 82px;
 `;
 
 export const Title = styled.div`
