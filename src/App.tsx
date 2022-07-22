@@ -4,9 +4,8 @@ import { CodeLogo } from "./logos/codeLogo";
 import { GoogleLogo } from "./logos/googleLogo";
 import { DdgLogo } from "./logos/ddgLogo";
 import { SearchLogo } from "./logos/searchLogo";
-import { YouLogo } from "./logos/youLogo";
 
-import { YOUALL, YOUCODE, DDG, GOOGLE } from "./constants";
+import { YOUALL, YOUCODE, DDG, GOOGLE, CDN_YDC_BASE } from "./constants";
 
 import * as Styles from "./App.styles";
 
@@ -54,9 +53,10 @@ function App() {
   return (
     <Styles.App>
       <Styles.AppHeader>
-        <Styles.YouLogoContainer>
-          <YouLogo />
-        </Styles.YouLogoContainer>
+        <Styles.YouLogoContainer
+          src={ `${CDN_YDC_BASE}/shared/logos/ydc-logo-lightdarkmode.svg` }
+          alt="Logo"
+        />
         <Styles.Title>Search Experience</Styles.Title>
         <Styles.SubTitle>Search from the URL bar using</Styles.SubTitle>
 
