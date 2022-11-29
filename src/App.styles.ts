@@ -58,7 +58,7 @@ export const SeparationLine = styled.div`
   align-self: center;
   height: 1px;
   width: 100%;
-  border-top: 1px dashed black;
+  border-top: 1px solid black;
   opacity: 0.1;
   margin: 10px;
 `;
@@ -67,14 +67,25 @@ export const SeparationText = styled(StyledCaption)`
   width: 70%;
   font-size: 12px;
   font-color: #aeaeb2;
+  white-space: nowrap;
 `;
 
 export const AlternativeWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  justifiy-content: center;
+  margin-bottom: ${spacing.ml};
+  align-items: center;
+  box-sizing: border-box;
+`;
+
+export const AlternativeWrapperRow = styled.div`
+  display: flex;
   justifiy-content: center;
   align-items: center;
-  margin-bottom: ${spacing.lg};
   box-sizing: border-box;
+  margin-bottom: ${spacing.xxs};
+  flex-wrap: wrap;
 `;
 
 export const GoogleContainer = styled.div`
@@ -88,6 +99,20 @@ export const DdgContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 125px;
+  box-sizing: border-box;
+`;
+
+export const YouCodeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 105px;
+  box-sizing: border-box;
+`;
+
+export const YouComContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 95px;
   box-sizing: border-box;
 `;
 
@@ -105,7 +130,7 @@ export const AlternativeButton = styled.button<ISelectedProps>`
 `;
 
 export const AlternativeText = styled.div<ISelectedProps>`
-  color: ${({ selected }) => (selected ? "#4A72F5" : "black")};
+  color: ${({ selected }) => (selected ? "#696B6C" : "black")};
   font-weight: ${({ selected }) => (selected ? "600" : "400")};
   padding: 0 ${spacing.xxs};
 `;
