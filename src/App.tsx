@@ -1,13 +1,5 @@
 import React from "react";
 
-import { GoogleLogo } from "./logos/googleLogo";
-import { DdgLogo } from "./logos/ddgLogo";
-import { YouComRoundLogo } from "./logos/youComRoundLogo";
-import { YouCodeRoundLogo } from "./logos/youCodeRoundLogo";
-import { WriteSquareLogo } from "./logos/writeSquareLogo";
-import { CodeSquareLogo } from "./logos/codeSquareLogo";
-import { DrawSquareLogo } from "./logos/drawSquareLogo";
-
 import {
   YOUALL,
   YOUCODE,
@@ -86,7 +78,12 @@ function App() {
         <Styles.SuiteWrapper>
           <SuiteComponent
             suiteTitle="Write"
-            logo={<WriteSquareLogo />}
+            logo={
+              <img
+                src={`${CDN_YDC_BASE}/images/extension/WriteSquareLogo.svg`}
+                alt="YouWrite Logo"
+              />
+            }
             selected={false}
             handleOnClick={() => {
               clickedWriteApp();
@@ -95,7 +92,12 @@ function App() {
 
           <SuiteComponent
             suiteTitle="Code"
-            logo={<CodeSquareLogo />}
+            logo={
+              <img
+                src={`${CDN_YDC_BASE}/images/extension/CodeSquareLogo.svg`}
+                alt="YouCode Logo"
+              />
+            }
             selected={false}
             handleOnClick={() => {
               clickedCodeApp();
@@ -104,7 +106,12 @@ function App() {
 
           <SuiteComponent
             suiteTitle="Draw"
-            logo={<DrawSquareLogo />}
+            logo={
+              <img
+                src={`${CDN_YDC_BASE}/images/extension/DrawSquareLogo.svg`}
+                alt="YouCode Logo"
+              />
+            }
             selected={false}
             handleOnClick={() => {
               clickedDrawApp();
@@ -128,7 +135,10 @@ function App() {
                   clickedAll();
                 }}
               >
-                <YouComRoundLogo />
+                <img
+                  src={`${CDN_YDC_BASE}/images/extension/YouComRoundLogo.svg`}
+                  alt="You Logo"
+                />
                 <Styles.AlternativeText selected={selected === YOUALL}>
                   You.com
                 </Styles.AlternativeText>
@@ -143,7 +153,10 @@ function App() {
                   clickedCode();
                 }}
               >
-                <YouCodeRoundLogo />
+                <img
+                  src={`${CDN_YDC_BASE}/images/extension/YouCodeRoundLogo.svg`}
+                  alt="YouCode Logo"
+                />
                 <Styles.AlternativeText selected={selected === YOUCODE}>
                   YouCode
                 </Styles.AlternativeText>
@@ -159,7 +172,10 @@ function App() {
                   clickedDdg();
                 }}
               >
-                <DdgLogo />
+                <img
+                  src={`${CDN_YDC_BASE}/images/extension/DDGLogo.svg`}
+                  alt="DuckDuckGo Logo"
+                />
                 <Styles.AlternativeText selected={selected === DDG}>
                   DuckDuckGo
                 </Styles.AlternativeText>
@@ -174,7 +190,10 @@ function App() {
                   clickedGoogle();
                 }}
               >
-                <GoogleLogo />
+                <img
+                  src={`${CDN_YDC_BASE}/images/extension/GoogleLogo.svg`}
+                  alt="Google Logo"
+                />
                 <Styles.AlternativeText selected={selected === GOOGLE}>
                   Google
                 </Styles.AlternativeText>
