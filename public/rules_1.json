@@ -1,20 +1,16 @@
 [
-    {
-
-        "id": 1,
-        "priority": 9,
-        "action": {
-          "type": "redirect",
-          "redirect": {
-            "regexSubstitution": "https://code.you.com/search?q=\\1&fromExtension=true"
-          }
-        },
-        "condition": {
-          "regexFilter": "^https://you\\.com/default/search\\?q=(.*)",
-          "resourceTypes": [
-            "main_frame"
-          ]
-        }
+  {
+    "id": 1,
+    "priority": 9,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://code.you.com/search?q=\\1&fromExtension=true"
       }
+    },
+    "condition": {
+      "regexFilter": "^https://you\\.com/default/search\\?q=(.*)",
+      "resourceTypes": ["main_frame"]
+    }
+  }
 ]
-

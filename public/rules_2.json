@@ -1,5 +1,5 @@
 [
-{
+  {
     "id": 2,
     "priority": 1,
     "action": {
@@ -10,9 +10,7 @@
     },
     "condition": {
       "regexFilter": "^https://you\\.com/default/search\\?q=(.*)",
-      "resourceTypes": [
-        "main_frame"
-      ]
+      "resourceTypes": ["main_frame"]
     }
   }
 ]
