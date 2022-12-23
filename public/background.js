@@ -1,7 +1,25 @@
 /*global chrome*/
 
 chrome.runtime.onMessage.addListener((req) => {
-  if (req == "linkwrite") {
+  if (req == "linkchat") {
+    const queries = [
+      "What+is+the+best+poem",
+      "What+is+the+capital+of+France",
+      "What+is+the+meaning+of+life",
+      "Tell+me+a+joke",
+      "What+is+the+difference+between+AI+and+machine+learning",
+      "How+can+I+learn+more+about+artificial+intelligence",
+      "What+are+the+best+books+to+read+about+technology",
+      "How+can+I+get+started+with+coding",
+      "What+are+the+major+trends+in+the+tech+industry+right+now",
+    ];
+
+    const index = Math.floor(Math.random() * 100) % queries.length;
+
+    chrome.tabs.create({
+      url: "https://you.com/search?q=" + queries[index] + "&tbm=youchat",
+    });
+  } else if (req == "linkwrite") {
     chrome.tabs.create({ url: "https://you.com/search?q=%40write" });
   } else if (req == "linkcode") {
     chrome.tabs.create({ url: "https://you.com/search?q=%40code" });

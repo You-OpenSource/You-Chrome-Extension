@@ -7,6 +7,7 @@ import {
   GOOGLE,
   CDN_YDC_BASE,
   YOUCODE_LINKAPP,
+  YOUCHAT_LINKAPP,
   YOUWRITE_LINKAPP,
   YOUDRAW_LINKAPP,
 } from "./constants";
@@ -21,6 +22,10 @@ function clickedAll() {
 
 function clickedCode() {
   chrome.runtime.sendMessage(chrome.runtime.id, YOUCODE);
+}
+
+function clickedChatApp() {
+  chrome.runtime.sendMessage(chrome.runtime.id, YOUCHAT_LINKAPP);
 }
 
 function clickedWriteApp() {
@@ -76,6 +81,20 @@ function App() {
         <Styles.SubTitle>Generative AI tools to do more</Styles.SubTitle>
 
         <Styles.SuiteWrapper>
+          <SuiteComponent
+            suiteTitle="Chat"
+            logo={
+              <img
+                src={`${CDN_YDC_BASE}/images/extension/ChatSquareLogo.svg`}
+                alt="YouChat Logo"
+              />
+            }
+            selected={false}
+            handleOnClick={() => {
+              clickedChatApp();
+            }}
+          />
+
           <SuiteComponent
             suiteTitle="Write"
             logo={

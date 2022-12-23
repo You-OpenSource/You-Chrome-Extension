@@ -1,7 +1,7 @@
 {
   "name": "You.com | Multi-engine Search",
   "manifest_version": 3,
-  "version": "0.0.0.4",
+  "version": "0.0.0.5",
   "description" : "Switch between different search engines with a click",
   "action": {
     "default_popup": "index.html",
