@@ -1,7 +1,7 @@
 /*global chrome*/
 
 chrome.runtime.onMessage.addListener((req) => {
-  if (req == "linkchat") {
+  if (req === "linkchat") {
     const queries = [
       "What+is+the+difference+between+AI+and+machine+learning",
       "What+is+the+best+poem",
@@ -26,25 +26,25 @@ chrome.runtime.onMessage.addListener((req) => {
     chrome.tabs.create({
       url: "https://you.com/search?q=" + queries[index] + "&tbm=youchat",
     });
-  } else if (req == "linkwrite") {
+  } else if (req === "linkwrite") {
     chrome.tabs.create({ url: "https://you.com/search?q=%40write" });
-  } else if (req == "linkcode") {
+  } else if (req === "linkcode") {
     chrome.tabs.create({ url: "https://you.com/search?q=%40code" });
-  } else if (req == "linkdraw") {
+  } else if (req === "linkdraw") {
     chrome.tabs.create({ url: "https://you.com/search?q=%40draw" });
-  } else if (req == "code") {
+  } else if (req === "code") {
     chrome.declarativeNetRequest.updateEnabledRulesets({
       enableRulesetIds: ["ruleset_1"],
       disableRulesetIds: ["ruleset_2", "ruleset_3", "ruleset_4"],
     });
     chrome.tabs.create({ url: "https://code.you.com/" });
-  } else if (req == "ddg") {
+  } else if (req === "ddg") {
     chrome.declarativeNetRequest.updateEnabledRulesets({
       enableRulesetIds: ["ruleset_3"],
       disableRulesetIds: ["ruleset_1", "ruleset_2", "ruleset_4"],
     });
     chrome.tabs.create({ url: "https://duckduckgo.com/" });
-  } else if (req == "google") {
+  } else if (req === "google") {
     chrome.declarativeNetRequest.updateEnabledRulesets({
       enableRulesetIds: ["ruleset_4"],
       disableRulesetIds: ["ruleset_1", "ruleset_2", "ruleset_3"],
@@ -74,7 +74,7 @@ chrome.runtime.onMessageExternal.addListener(function (
 ) {
   if (request) {
     if (request.message) {
-      if (request.message == "installed") {
+      if (request.message === "installed") {
         sendResponse(true);
       }
     }
