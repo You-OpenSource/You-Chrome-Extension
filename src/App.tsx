@@ -3,7 +3,7 @@ import React from "react";
 import {
   YOUALL,
   YOUCODE,
-  DDG,
+  YOUCHAT,
   GOOGLE,
   CDN_YDC_BASE,
   YOUCODE_LINKAPP,
@@ -40,8 +40,8 @@ function clickedDrawApp() {
   chrome.runtime.sendMessage(chrome.runtime.id, YOUDRAW_LINKAPP);
 }
 
-function clickedDdg() {
-  chrome.runtime.sendMessage(chrome.runtime.id, DDG);
+function clickedYouChat() {
+  chrome.runtime.sendMessage(chrome.runtime.id, YOUCHAT);
 }
 
 function clickedGoogle() {
@@ -163,7 +163,25 @@ function App() {
                 </Styles.AlternativeText>
               </Styles.AlternativeButton>
             </Styles.YouComContainer>
-
+            <Styles.YouChatContainer>
+              <Styles.AlternativeButton
+                selected={selected === YOUCHAT}
+                onClick={() => {
+                  storeNewDefault(YOUCHAT);
+                  clickedYouChat();
+                }}
+              >
+                <img
+                  src={`${CDN_YDC_BASE}/images/extension/YouChatRoundLogo.svg`}
+                  alt="YouChat Logo"
+                />
+                <Styles.AlternativeText selected={selected === YOUCHAT}>
+                  YouChat
+                </Styles.AlternativeText>
+              </Styles.AlternativeButton>
+            </Styles.YouChatContainer>
+          </Styles.AlternativeWrapperRow>
+          <Styles.AlternativeWrapperRow>
             <Styles.YouCodeContainer>
               <Styles.AlternativeButton
                 selected={selected === YOUCODE}
@@ -181,25 +199,6 @@ function App() {
                 </Styles.AlternativeText>
               </Styles.AlternativeButton>
             </Styles.YouCodeContainer>
-          </Styles.AlternativeWrapperRow>
-          <Styles.AlternativeWrapperRow>
-            <Styles.DdgContainer>
-              <Styles.AlternativeButton
-                selected={selected === DDG}
-                onClick={() => {
-                  storeNewDefault(DDG);
-                  clickedDdg();
-                }}
-              >
-                <img
-                  src={`${CDN_YDC_BASE}/images/extension/DDGLogo.svg`}
-                  alt="DuckDuckGo Logo"
-                />
-                <Styles.AlternativeText selected={selected === DDG}>
-                  DuckDuckGo
-                </Styles.AlternativeText>
-              </Styles.AlternativeButton>
-            </Styles.DdgContainer>
 
             <Styles.GoogleContainer>
               <Styles.AlternativeButton

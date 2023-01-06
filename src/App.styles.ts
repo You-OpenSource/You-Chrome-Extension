@@ -95,7 +95,7 @@ export const GoogleContainer = styled.div`
   box-sizing: border-box;
 `;
 
-export const DdgContainer = styled.div`
+export const YouChatContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 125px;

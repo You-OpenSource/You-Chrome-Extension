@@ -38,12 +38,14 @@ chrome.runtime.onMessage.addListener((req) => {
       disableRulesetIds: ["ruleset_2", "ruleset_3", "ruleset_4"],
     });
     chrome.tabs.create({ url: "https://code.you.com/" });
-  } else if (req === "ddg") {
+  } else if (req === "youchat") {
     chrome.declarativeNetRequest.updateEnabledRulesets({
       enableRulesetIds: ["ruleset_3"],
       disableRulesetIds: ["ruleset_1", "ruleset_2", "ruleset_4"],
     });
-    chrome.tabs.create({ url: "https://duckduckgo.com/" });
+    chrome.tabs.create({
+      url: "https://you.com/search?q=" + queries[index] + "&tbm=youchat",
+    });
   } else if (req === "google") {
     chrome.declarativeNetRequest.updateEnabledRulesets({
       enableRulesetIds: ["ruleset_4"],
