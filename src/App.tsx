@@ -77,8 +77,7 @@ function App() {
           src={`${CDN_YDC_BASE}/shared/logos/ydc-logo-lightdarkmode.svg`}
           alt="Logo"
         />
-        <Styles.Title>Create with AI</Styles.Title>
-        <Styles.SubTitle>Generative AI tools to do more</Styles.SubTitle>
+        <Styles.Title>Do more with AI</Styles.Title>
 
         <Styles.SuiteWrapper>
           <SuiteComponent
