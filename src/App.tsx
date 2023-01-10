@@ -16,38 +16,6 @@ import * as Styles from "./App.styles";
 
 import SuiteComponent from "./SuiteComponent/SuiteComponent";
 
-function clickedAll() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUALL);
-}
-
-function clickedCode() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCODE);
-}
-
-function clickedChatApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCHAT_LINKAPP);
-}
-
-function clickedWriteApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUWRITE_LINKAPP);
-}
-
-function clickedCodeApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCODE_LINKAPP);
-}
-
-function clickedDrawApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUDRAW_LINKAPP);
-}
-
-function clickedYouChat() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCHAT);
-}
-
-function clickedGoogle() {
-  chrome.runtime.sendMessage(chrome.runtime.id, GOOGLE);
-}
-
 const handleClick = (domain: string, shouldOpenNewTab: boolean = true) => {
   chrome.runtime.sendMessage(chrome.runtime.id, {
     domain:domain, shouldOpenNewTab: shouldOpenNewTab
