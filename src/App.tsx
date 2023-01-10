@@ -16,36 +16,10 @@ import * as Styles from "./App.styles";
 
 import SuiteComponent from "./SuiteComponent/SuiteComponent";
 
-function clickedAll() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUALL);
-}
-
-function clickedCode() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCODE);
-}
-
-function clickedChatApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCHAT_LINKAPP);
-}
-
-function clickedWriteApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUWRITE_LINKAPP);
-}
-
-function clickedCodeApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCODE_LINKAPP);
-}
-
-function clickedDrawApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUDRAW_LINKAPP);
-}
-
-function clickedYouChat() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCHAT);
-}
-
-function clickedGoogle() {
-  chrome.runtime.sendMessage(chrome.runtime.id, GOOGLE);
+const handleClick = (domain: string, shouldOpenNewTab: boolean = true) => {
+  chrome.runtime.sendMessage(chrome.runtime.id, {
+    domain:domain, shouldOpenNewTab: shouldOpenNewTab
+  });
 }
 
 function App() {
@@ -60,6 +34,7 @@ function App() {
     try {
       chrome.storage.local.get("selected", ({ selected }) => {
         setSelected(selected);
+        handleClick(selected, false);
       });
     } catch (err) {
       console.log(err);
@@ -90,7 +65,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedChatApp();
+              handleClick(YOUCHAT_LINKAPP)
             }}
           />
 
@@ -104,7 +79,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedWriteApp();
+              handleClick(YOUWRITE_LINKAPP);
             }}
           />
 
@@ -118,7 +93,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedCodeApp();
+              handleClick(YOUCODE_LINKAPP)
             }}
           />
 
@@ -132,7 +107,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedDrawApp();
+              handleClick(YOUDRAW_LINKAPP);
             }}
           />
         </Styles.SuiteWrapper>
@@ -150,7 +125,7 @@ function App() {
                 selected={selected === YOUALL}
                 onClick={() => {
                   storeNewDefault(YOUALL);
-                  clickedAll();
+                  handleClick(YOUALL)
                 }}
               >
                 <img
@@ -167,7 +142,7 @@ function App() {
                 selected={selected === YOUCHAT}
                 onClick={() => {
                   storeNewDefault(YOUCHAT);
-                  clickedYouChat();
+                  handleClick(YOUCHAT);
                 }}
               >
                 <img
@@ -186,7 +161,7 @@ function App() {
                 selected={selected === YOUCODE}
                 onClick={() => {
                   storeNewDefault(YOUCODE);
-                  clickedCode();
+                  handleClick(YOUCODE);
                 }}
               >
                 <img
@@ -204,7 +179,7 @@ function App() {
                 selected={selected === GOOGLE}
                 onClick={() => {
                   storeNewDefault(GOOGLE);
-                  clickedGoogle();
+                  handleClick(GOOGLE);
                 }}
               >
                 <img
