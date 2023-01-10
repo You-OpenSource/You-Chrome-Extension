@@ -48,6 +48,12 @@ function clickedGoogle() {
   chrome.runtime.sendMessage(chrome.runtime.id, GOOGLE);
 }
 
+const handleClick = (domain: string, shouldOpenNewTab: boolean = true) => {
+  chrome.runtime.sendMessage(chrome.runtime.id, {
+    domain:domain, shouldOpenNewTab: shouldOpenNewTab
+  });
+}
+
 function App() {
   const [selected, setSelected] = React.useState("");
 
@@ -60,6 +66,7 @@ function App() {
     try {
       chrome.storage.local.get("selected", ({ selected }) => {
         setSelected(selected);
+        handleClick(selected, false);
       });
     } catch (err) {
       console.log(err);
@@ -90,7 +97,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedChatApp();
+              handleClick(YOUCHAT_LINKAPP)
             }}
           />
 
@@ -104,7 +111,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedWriteApp();
+              handleClick(YOUWRITE_LINKAPP);
             }}
           />
 
@@ -118,7 +125,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedCodeApp();
+              handleClick(YOUCODE_LINKAPP)
             }}
           />
 
@@ -132,7 +139,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedDrawApp();
+              handleClick(YOUDRAW_LINKAPP);
             }}
           />
         </Styles.SuiteWrapper>
@@ -150,7 +157,7 @@ function App() {
                 selected={selected === YOUALL}
                 onClick={() => {
                   storeNewDefault(YOUALL);
-                  clickedAll();
+                  handleClick(YOUALL)
                 }}
               >
                 <img
@@ -167,7 +174,7 @@ function App() {
                 selected={selected === YOUCHAT}
                 onClick={() => {
                   storeNewDefault(YOUCHAT);
-                  clickedYouChat();
+                  handleClick(YOUCHAT);
                 }}
               >
                 <img
@@ -186,7 +193,7 @@ function App() {
                 selected={selected === YOUCODE}
                 onClick={() => {
                   storeNewDefault(YOUCODE);
-                  clickedCode();
+                  handleClick(YOUCODE);
                 }}
               >
                 <img
@@ -204,7 +211,7 @@ function App() {
                 selected={selected === GOOGLE}
                 onClick={() => {
                   storeNewDefault(GOOGLE);
-                  clickedGoogle();
+                  handleClick(GOOGLE);
                 }}
               >
                 <img
