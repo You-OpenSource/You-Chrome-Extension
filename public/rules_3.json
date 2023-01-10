@@ -5,7 +5,7 @@
     "action": {
       "type": "redirect",
       "redirect": {
-        "regexSubstitution": "https://duckduckgo.com/?q=\\1"
+        "regexSubstitution": "https://you.com/search?tbm=youchat&q=\\1&fromExtension=true"
       }
     },
     "condition": {

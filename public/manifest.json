@@ -1,8 +1,8 @@
 {
-  "name": "You.com | Multi-engine Search",
+  "name": "You.com | Search, chat, and create with AI",
   "manifest_version": 3,
   "version": "0.0.0.5",
-  "description" : "Switch between different search engines with a click",
+  "description" : "Experience the future of search with generative AI",
   "action": {
     "default_popup": "index.html",
     "default_title": "Open the popup"

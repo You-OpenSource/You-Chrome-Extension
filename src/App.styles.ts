@@ -86,33 +86,30 @@ export const AlternativeWrapperRow = styled.div`
   box-sizing: border-box;
   margin-bottom: ${spacing.xxs};
   flex-wrap: wrap;
+  gap: 10px;
 `;
 
 export const GoogleContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 85px;
   box-sizing: border-box;
 `;
 
-export const DdgContainer = styled.div`
+export const YouChatContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 125px;
   box-sizing: border-box;
 `;
 
 export const YouCodeContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 105px;
   box-sizing: border-box;
 `;
 
 export const YouComContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 95px;
   box-sizing: border-box;
 `;
 

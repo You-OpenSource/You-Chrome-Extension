@@ -3,7 +3,7 @@ import React from "react";
 import {
   YOUALL,
   YOUCODE,
-  DDG,
+  YOUCHAT,
   GOOGLE,
   CDN_YDC_BASE,
   YOUCODE_LINKAPP,
@@ -16,36 +16,10 @@ import * as Styles from "./App.styles";
 
 import SuiteComponent from "./SuiteComponent/SuiteComponent";
 
-function clickedAll() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUALL);
-}
-
-function clickedCode() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCODE);
-}
-
-function clickedChatApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCHAT_LINKAPP);
-}
-
-function clickedWriteApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUWRITE_LINKAPP);
-}
-
-function clickedCodeApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUCODE_LINKAPP);
-}
-
-function clickedDrawApp() {
-  chrome.runtime.sendMessage(chrome.runtime.id, YOUDRAW_LINKAPP);
-}
-
-function clickedDdg() {
-  chrome.runtime.sendMessage(chrome.runtime.id, DDG);
-}
-
-function clickedGoogle() {
-  chrome.runtime.sendMessage(chrome.runtime.id, GOOGLE);
+const handleClick = (domain: string, shouldOpenNewTab: boolean = true) => {
+  chrome.runtime.sendMessage(chrome.runtime.id, {
+    domain:domain, shouldOpenNewTab: shouldOpenNewTab
+  });
 }
 
 function App() {
@@ -60,6 +34,7 @@ function App() {
     try {
       chrome.storage.local.get("selected", ({ selected }) => {
         setSelected(selected);
+        handleClick(selected, false);
       });
     } catch (err) {
       console.log(err);
@@ -77,8 +52,7 @@ function App() {
           src={`${CDN_YDC_BASE}/shared/logos/ydc-logo-lightdarkmode.svg`}
           alt="Logo"
         />
-        <Styles.Title>Create with AI</Styles.Title>
-        <Styles.SubTitle>Generative AI tools to do more</Styles.SubTitle>
+        <Styles.Title>Do more with AI</Styles.Title>
 
         <Styles.SuiteWrapper>
           <SuiteComponent
@@ -91,7 +65,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedChatApp();
+              handleClick(YOUCHAT_LINKAPP)
             }}
           />
 
@@ -105,7 +79,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedWriteApp();
+              handleClick(YOUWRITE_LINKAPP);
             }}
           />
 
@@ -119,7 +93,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedCodeApp();
+              handleClick(YOUCODE_LINKAPP)
             }}
           />
 
@@ -133,7 +107,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              clickedDrawApp();
+              handleClick(YOUDRAW_LINKAPP);
             }}
           />
         </Styles.SuiteWrapper>
@@ -151,7 +125,7 @@ function App() {
                 selected={selected === YOUALL}
                 onClick={() => {
                   storeNewDefault(YOUALL);
-                  clickedAll();
+                  handleClick(YOUALL)
                 }}
               >
                 <img
@@ -163,13 +137,31 @@ function App() {
                 </Styles.AlternativeText>
               </Styles.AlternativeButton>
             </Styles.YouComContainer>
-
+            <Styles.YouChatContainer>
+              <Styles.AlternativeButton
+                selected={selected === YOUCHAT}
+                onClick={() => {
+                  storeNewDefault(YOUCHAT);
+                  handleClick(YOUCHAT);
+                }}
+              >
+                <img
+                  src={`${CDN_YDC_BASE}/images/extension/YouChatRoundLogo.svg`}
+                  alt="YouChat Logo"
+                />
+                <Styles.AlternativeText selected={selected === YOUCHAT}>
+                  YouChat
+                </Styles.AlternativeText>
+              </Styles.AlternativeButton>
+            </Styles.YouChatContainer>
+          </Styles.AlternativeWrapperRow>
+          <Styles.AlternativeWrapperRow>
             <Styles.YouCodeContainer>
               <Styles.AlternativeButton
                 selected={selected === YOUCODE}
                 onClick={() => {
                   storeNewDefault(YOUCODE);
-                  clickedCode();
+                  handleClick(YOUCODE);
                 }}
               >
                 <img
@@ -181,32 +173,13 @@ function App() {
                 </Styles.AlternativeText>
               </Styles.AlternativeButton>
             </Styles.YouCodeContainer>
-          </Styles.AlternativeWrapperRow>
-          <Styles.AlternativeWrapperRow>
-            <Styles.DdgContainer>
-              <Styles.AlternativeButton
-                selected={selected === DDG}
-                onClick={() => {
-                  storeNewDefault(DDG);
-                  clickedDdg();
-                }}
-              >
-                <img
-                  src={`${CDN_YDC_BASE}/images/extension/DDGLogo.svg`}
-                  alt="DuckDuckGo Logo"
-                />
-                <Styles.AlternativeText selected={selected === DDG}>
-                  DuckDuckGo
-                </Styles.AlternativeText>
-              </Styles.AlternativeButton>
-            </Styles.DdgContainer>
 
             <Styles.GoogleContainer>
               <Styles.AlternativeButton
                 selected={selected === GOOGLE}
                 onClick={() => {
                   storeNewDefault(GOOGLE);
-                  clickedGoogle();
+                  handleClick(GOOGLE);
                 }}
               >
                 <img
