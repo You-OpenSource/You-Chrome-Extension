@@ -22,9 +22,9 @@ chrome.runtime.onMessage.addListener((req) => {
 
   const index = Math.floor(Math.random() * 100) % queries.length;
 
-  const { domain, shouldOpenNewTab } = req
-  
-  if (domain === "linkchat") {  
+  const { domain, shouldOpenNewTab } = req;
+
+  if (domain === "linkchat") {
     chrome.tabs.create({
       url: "https://you.com/search?q=" + queries[index] + "&tbm=youchat",
     });
@@ -60,7 +60,6 @@ chrome.runtime.onMessage.addListener((req) => {
     if (shouldOpenNewTab) {
       chrome.tabs.create({ url: "https://www.google.com/" });
     }
-    
   } else {
     chrome.declarativeNetRequest.updateEnabledRulesets({
       enableRulesetIds: ["ruleset_2"],
@@ -74,8 +73,11 @@ chrome.runtime.onMessage.addListener((req) => {
 
 chrome.runtime.setUninstallURL("https://about.you.com/exit-survey");
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.tabs.create({ active: true, url: "https://about.you.com/welcome/" });
+// https://developer.chrome.com/docs/extensions/reference/runtime/#event-onInstalled
+chrome.runtime.onInstalled.addListener((request) => {
+  if (request.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+    chrome.tabs.create({ active: true, url: "https://about.you.com/welcome/" });
+  }
 });
 
 // Let the you.com website detect whether the extension is installed
