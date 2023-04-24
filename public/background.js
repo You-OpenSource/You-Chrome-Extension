@@ -24,7 +24,11 @@ chrome.runtime.onMessage.addListener((req) => {
 
   const { domain, shouldOpenNewTab } = req;
 
-  if (domain === "linkchat") {
+  if (domain === "extensionlink") {
+    chrome.tabs.create({
+      url: "https://chrome.google.com/webstore/detail/youcom/afiglppdonkdbkkaghbnpklddbemkbpj",
+    });
+  } else if (domain === "linkchat") {
     chrome.tabs.create({
       url: "https://you.com/search?q=" + queries[index] + "&tbm=youchat",
     });
@@ -95,4 +99,23 @@ chrome.runtime.onMessageExternal.addListener(function (
     }
   }
   return true;
+});
+
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  // read changeInfo data and do something with it
+  // like send the new url to contentscripts.js
+  if (changeInfo.url) {
+    chrome.runtime.sendMessage({ msg: "activeTab", pageUrl: changeInfo.url });
+  }
+});
+
+chrome.runtime.onMessage.addListener((_req, _sender, sendResponse) => {
+  // query tabs to find an active tab
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    var activeTab = tabs[0];
+    var activeTabURL = activeTab.url;
+
+    chrome.runtime.sendMessage({ msg: "activeTab", pageUrl: activeTabURL });
+    sendResponse(activeTabURL);
+  });
 });

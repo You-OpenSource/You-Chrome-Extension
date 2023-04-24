@@ -23,7 +23,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "INLINE_RUNTIME_CHUNK=false craco build",
+    "build": "INLINE_RUNTIME_CHUNK=false craco build && npm run postbuild",
+    "postbuild": "node ./scripts/postbuild.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier:fix": "prettier --write \"**/*.{js,tsx,ts,css,scss,jsx}\""

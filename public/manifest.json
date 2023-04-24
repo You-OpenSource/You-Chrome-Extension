@@ -1,8 +1,8 @@
 {
   "name": "You.com | Search, chat, and create with AI",
   "manifest_version": 3,
-  "version": "0.0.0.6",
-  "description" : "Experience the future of search with generative AI",
+  "version": "0.0.0.7",
+  "description": "Experience the future of search with generative AI",
   "action": {
     "default_popup": "index.html",
     "default_title": "Open the popup"
@@ -11,47 +11,67 @@
     {
       "matches": ["<all_urls>"],
       "js": ["./static/js/content.js"]
+    },
+    {
+      "matches": [
+        "https://www.google.com/search*",
+        "https://www.google.ca/search*",
+        "https://www.google.co.uk/search*",
+        "https://www.google.co.nz/search*",
+        "https://www.google.com.au/search*",
+        "https://www.google.co.in/search*",
+        "https://www.google.de/search*",
+        "https://www.google.es/search*",
+        "https://www.google.fr/search*",
+        "https://www.google.com.ar/search*"
+      ],
+      "run_at": "document_end",
+      "js": [],
+      "css": [],
+      "media": []
     }
-  ], 
-  "declarative_net_request" : {
-    "rule_resources" : [
-        {
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
         "id": "ruleset_1",
         "enabled": false,
         "path": "rules_1.json"
-        },
-        {
-          "id": "ruleset_2",
-          "enabled": true,
-          "path": "rules_2.json"
-        },
-        {
-          "id": "ruleset_3",
-          "enabled": false,
-          "path": "rules_3.json"
-        },
-        {
-          "id": "ruleset_4",
-          "enabled": false,
-          "path": "rules_4.json"
-        }
-      ]
-    },
-  "permissions": [
-    "declarativeNetRequestWithHostAccess", "storage"
-  ], 
-  "host_permissions": [
-  "*://*/*"
+      },
+      {
+        "id": "ruleset_2",
+        "enabled": true,
+        "path": "rules_2.json"
+      },
+      {
+        "id": "ruleset_3",
+        "enabled": false,
+        "path": "rules_3.json"
+      },
+      {
+        "id": "ruleset_4",
+        "enabled": false,
+        "path": "rules_4.json"
+      }
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [],
+      "matches": ["<all_urls>"]
+    }
   ],
+  "permissions": ["declarativeNetRequestWithHostAccess", "storage"],
+  "host_permissions": ["*://*/*"],
   "background": {
     "service_worker": "background.js"
   },
 
   "icons": {
-      "16": "icons/favicon-16x16.png",
-      "48": "icons/favicon-48x48.png",
-      "128": "icons/favicon-128x128.png"
-    },
+    "16": "icons/favicon-16x16.png",
+    "48": "icons/favicon-48x48.png",
+    "128": "icons/favicon-128x128.png"
+  },
 
   "chrome_settings_overrides": {
     "search_provider": {
@@ -66,6 +86,6 @@
   },
 
   "externally_connectable": {
-      "matches": ["*://localhost/*", "*://you.com/*", "*://*.you.com/*"]
+    "matches": ["*://localhost/*", "*://you.com/*", "*://*.you.com/*"]
   }
 }
