@@ -1,7 +1,7 @@
 {
   "name": "You.com | Search, chat, and create with AI",
   "manifest_version": 3,
-  "version": "0.0.0.7",
+  "version": "2.0.0",
   "description": "Experience the future of search with generative AI",
   "action": {
     "default_popup": "index.html",
@@ -40,7 +40,7 @@
       },
       {
         "id": "ruleset_2",
-        "enabled": true,
+        "enabled": false,
         "path": "rules_2.json"
       },
       {
@@ -71,18 +71,6 @@
     "16": "icons/favicon-16x16.png",
     "48": "icons/favicon-48x48.png",
     "128": "icons/favicon-128x128.png"
-  },
-
-  "chrome_settings_overrides": {
-    "search_provider": {
-      "name": "you.com",
-      "keyword": "you.com",
-      "search_url": "https://you.com/default/search?q={searchTerms}",
-      "suggest_url": "https://you.com/api/ac?q={searchTerms}",
-      "favicon_url": "https://you.com/favicon/favicon.ico",
-      "encoding": "UTF-8",
-      "is_default": true
-    }
   },
 
   "externally_connectable": {

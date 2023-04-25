@@ -9,7 +9,7 @@ export const SummarizeButtonIcon = styled.div`
   justify-content: center;
   align-items: center;
 
-  background: #8B8E8F;
+  background: #8b8e8f;
   width: 20px;
   height: 20px;
 
@@ -29,7 +29,9 @@ export const SummarizeButton = styled.button`
   letter-spacing: -0.15px;
   color: #2e2f30;
 
-  margin: ${spacing.s};
+  cursor: pointer;
+
+  margin: ${spacing.s} ${spacing.xxs};
   white-space: nowrap;
   font-weight: 600;
   font-size: 14px;
@@ -55,12 +57,14 @@ export const AlternativeWrapperRow = styled.div`
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
-  bottom: 1.75rem;
+  bottom: ${spacing.xl};
 
   overflow-x: auto;
 
   position: absolute;
   width: 100%;
+
+  padding: 0 ${spacing.xxs};
 
   &::-webkit-scrollbar {
     display: none;
