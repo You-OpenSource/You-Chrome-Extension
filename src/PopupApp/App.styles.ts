@@ -62,9 +62,10 @@ export const AlternativeWrapperRow = styled.div`
   overflow-x: auto;
 
   position: absolute;
-  width: 100%;
 
-  padding: 0 ${spacing.xxs};
+  left: 0;
+  right: 15px;
+  padding: 0px ${spacing.xxs} 0 ${spacing.md};
 
   &::-webkit-scrollbar {
     display: none;
