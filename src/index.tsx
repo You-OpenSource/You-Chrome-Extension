@@ -44,10 +44,14 @@ if (!doNotRender) {
     }
   }
 
-  ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-    document.getElementsByClassName(rootClassName)[0]
-  );
+  const root = document.getElementsByClassName(rootClassName)[0];
+
+  if (root) {
+    ReactDOM.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>,
+      root
+    );
+  }
 }
