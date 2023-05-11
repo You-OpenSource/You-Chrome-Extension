@@ -15,7 +15,10 @@ chrome.runtime.setUninstallURL("https://about.you.com/exit-survey");
 // https://developer.chrome.com/docs/extensions/reference/runtime/#event-onInstalled
 chrome.runtime.onInstalled.addListener((request) => {
   if (request.reason === chrome.runtime.OnInstalledReason.INSTALL) {
-    chrome.tabs.create({ active: true, url: "https://about.you.com/welcome/" });
+    chrome.tabs.create({
+      active: true,
+      url: "https://about.you.com/welcome/",
+    });
   }
 });
 

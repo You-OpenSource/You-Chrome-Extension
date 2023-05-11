@@ -3,24 +3,25 @@ import * as React from "react";
 import { INITIAL_PAGE } from "./constants";
 
 import * as Styles from "./App.styles";
-import SendIcon from "../send.svg";
-
-const getImages = () => {
-  if (window.chrome) {
-    return {
-      send: window.chrome.runtime.getURL(SendIcon),
-    };
-  }
-
-  return {
-    send: "",
-  };
-};
 
 function App() {
   const [activePageUrl, setActivePageUrl] = React.useState("");
   const chatRef = React.useRef<HTMLIFrameElement>(null);
-  const { send } = getImages();
+  const checkURLIntervalRef = React.useRef<ReturnType<typeof setInterval>>();
+
+  const sendActivePageUrl = (activePage: string) => {
+    try {
+      chatRef.current?.contentWindow?.postMessage(
+        {
+          source: "chrome_plugin",
+          activePageUrl: activePage,
+        },
+        "*"
+      );
+    } catch (e) {
+      console.error("post message failed: ", e);
+    }
+  };
 
   const handleTabUrlUpdated = (
     req: { msg: string; pageUrl: string },
@@ -29,6 +30,7 @@ function App() {
   ) => {
     if (req.msg === "activeTab") {
       setActivePageUrl(req.pageUrl);
+      sendActivePageUrl(req.pageUrl);
     }
   };
 
@@ -39,38 +41,24 @@ function App() {
     });
   };
 
-  const handleSearch = (searchValue: string) => {
-    try {
-      chatRef.current?.contentWindow?.postMessage(
-        {
-          source: "chrome_plugin",
-          query: searchValue,
-        },
-        "*"
-      );
-    } catch (e) {
-      console.error("post message failed: ", e);
-    }
-  };
+  React.useEffect(() => {
+    // find initial url
+    checkURLIntervalRef.current = setInterval(() => {
+      chrome.runtime.sendMessage("provideActiveTabUrl");
+    }, 1000);
 
-  const handleSummarize = () => {
-    chrome.runtime.sendMessage("provideActiveTabUrl");
+    return () => {
+      clearInterval(checkURLIntervalRef.current);
+    };
+  }, []);
 
-    try {
-      chatRef.current?.contentWindow?.postMessage(
-        {
-          source: "chrome_plugin",
-          query: `Summarize ${activePageUrl}`,
-        },
-        "*"
-      );
-    } catch (e) {
-      console.error("post message failed: ", e);
+  React.useLayoutEffect(() => {
+    if (activePageUrl) {
+      sendActivePageUrl(activePageUrl);
     }
-  };
+  }, [activePageUrl]);
 
   React.useEffect(() => {
-    chrome.runtime.sendMessage("provideActiveTabUrl");
     chrome.runtime.onMessage.addListener(handleTabUrlUpdated);
 
     return () => {
@@ -90,33 +78,11 @@ function App() {
         width="100%"
         src={INITIAL_PAGE}
       />
-      <Styles.AlternativeWrapperRow>
-        <Styles.SummarizeButton key="summarize" onClick={handleSummarize}>
-          summarize this page
-          <Styles.SummarizeButtonIcon>
-            <Styles.SendIcon src={send} />
-          </Styles.SummarizeButtonIcon>
-        </Styles.SummarizeButton>
-        {[
-          "healthy recipes",
-          "barcelona itinerary",
-          "best backpacks",
-          "explain recursion",
-        ].map((value) => (
-          <Styles.SummarizeButton
-            key={value}
-            onClick={() => handleSearch(value)}
-          >
-            {value}
-            <Styles.SummarizeButtonIcon>
-              <Styles.SendIcon src={send} />
-            </Styles.SummarizeButtonIcon>
-          </Styles.SummarizeButton>
-        ))}
-      </Styles.AlternativeWrapperRow>
 
       <Styles.SeparatorContainer onClick={() => openNewTab("extensionlink")}>
-        <Styles.SeparationText>Set your default search</Styles.SeparationText>
+        <Styles.SeparationText>
+          Set YouChat as your default search
+        </Styles.SeparationText>
       </Styles.SeparatorContainer>
     </Styles.App>
   );

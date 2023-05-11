@@ -24,7 +24,6 @@ const js = readFile("static/js", "main", "js");
 const contentjs = readFile("static/js", "content", "js");
 const youbot = readFile("static/media", "youbot", "png");
 const closeIcon = readFile("static/media", "close", "svg");
-const sendIcon = readFile("static/media", "send", "svg");
 
 const newManifest = {
   ...manifest,
@@ -41,7 +40,7 @@ const newManifest = {
   web_accessible_resources: [
     {
       ...manifest.web_accessible_resources[0],
-      resources: [youbot, closeIcon, sendIcon],
+      resources: [youbot, closeIcon],
     },
   ],
 };

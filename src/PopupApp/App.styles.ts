@@ -98,6 +98,5 @@ export const SeparatorContainer = styled.div`
 
   background: #fafafa;
 
-  position: absolute;
   width: 100%;
 `;
