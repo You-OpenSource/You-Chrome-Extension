@@ -1,200 +1,97 @@
-import React from "react";
-
+import * as React from "react";
+import { useEffect, useState } from "react";
 import {
-  YOUALL,
-  YOUCODE,
-  YOUCHAT,
-  GOOGLE,
-  CDN_YDC_BASE,
-  YOUCODE_LINKAPP,
-  YOUCHAT_LINKAPP,
-  YOUWRITE_LINKAPP,
-  YOUDRAW_LINKAPP,
-} from "./constants";
+  CloseIcon,
+  Embed,
+  EmbedContainer,
+  LoadingComponent,
+  LoadingContainer,
+  LoadingImage,
+} from "./App.styles";
+import YouBotImage from "./youbot.png";
+import CloseX from "./close.svg";
+import { getEmbedHost } from "./util";
 
-import * as Styles from "./App.styles";
+const GUEST_ID_KEY = "google_extension_guest_id";
 
-import SuiteComponent from "./SuiteComponent/SuiteComponent";
+const getImages = () => {
+  if (window.chrome) {
+    return {
+      youbot: window.chrome.runtime.getURL(YouBotImage),
+      close: window.chrome.runtime.getURL(CloseX),
+    };
+  }
 
-const handleClick = (domain: string, shouldOpenNewTab: boolean = true) => {
-  chrome.runtime.sendMessage(chrome.runtime.id, {
-    domain:domain, shouldOpenNewTab: shouldOpenNewTab
-  });
-}
+  return {
+    youbot: "",
+    close: "",
+  };
+};
+
+const LoadingComponentWithDots = (): JSX.Element => {
+  return (
+    <LoadingComponent>
+      Loading YouChat <span className="loader__dot">. </span>
+      <span className="loader__dot">. </span>
+      <span className="loader__dot">.</span>
+    </LoadingComponent>
+  );
+};
 
 function App() {
-  const [selected, setSelected] = React.useState("");
-
-  const storeNewDefault = (newDefault: string) => {
-    chrome.storage.local.set({ selected: newDefault }, () => {});
-    setSelected(newDefault);
+  const urlParams = new URLSearchParams(window.location.search);
+  let query = urlParams.get("q");
+  const finalEmbedHeight = 510;
+  const [showApp, setShowApp] = useState(true);
+  const [embedHeight, setEmbedHeight] = useState(0);
+  const [guestId, setGuestId] = useState<string | null>(null);
+  const handleOnEmbedLoad = () => {
+    // timeout to prevent a flash of white
+    setTimeout(() => {
+      setEmbedHeight(finalEmbedHeight);
+    }, 200);
   };
+  const { youbot, close } = getImages();
 
-  const getLastDefault = () => {
-    try {
-      chrome.storage.local.get("selected", ({ selected }) => {
-        setSelected(selected);
-        handleClick(selected, false);
-      });
-    } catch (err) {
-      console.log(err);
+  const hideApp = () => setShowApp(false);
+
+  // set an unique identifier for the extension
+  useEffect(() => {
+    if (window?.chrome) {
+      const chrome = window.chrome;
+      chrome.storage.sync
+        .get(GUEST_ID_KEY)
+        .then((items: { [x: string]: any }) => {
+          const guestId = items[GUEST_ID_KEY];
+          if (guestId) {
+            setGuestId(guestId);
+          } else {
+            const guestId = crypto.randomUUID();
+            chrome.storage.sync.set({ [GUEST_ID_KEY]: guestId }).then(() => {
+              setGuestId(guestId);
+            });
+          }
+        });
     }
-  };
-
-  React.useEffect(() => {
-    getLastDefault();
   }, []);
 
-  return (
-    <Styles.App>
-      <Styles.AppHeader>
-        <Styles.YouLogoContainer
-          src={`${CDN_YDC_BASE}/shared/logos/ydc-logo-lightdarkmode.svg`}
-          alt="Logo"
-        />
-        <Styles.Title>Do more with AI</Styles.Title>
-
-        <Styles.SuiteWrapper>
-          <SuiteComponent
-            suiteTitle="Chat"
-            logo={
-              <img
-                src={`${CDN_YDC_BASE}/images/extension/ChatSquareLogo.svg`}
-                alt="YouChat Logo"
-              />
-            }
-            selected={false}
-            handleOnClick={() => {
-              handleClick(YOUCHAT_LINKAPP)
-            }}
-          />
-
-          <SuiteComponent
-            suiteTitle="Write"
-            logo={
-              <img
-                src={`${CDN_YDC_BASE}/images/extension/WriteSquareLogo.svg`}
-                alt="YouWrite Logo"
-              />
-            }
-            selected={false}
-            handleOnClick={() => {
-              handleClick(YOUWRITE_LINKAPP);
-            }}
-          />
-
-          <SuiteComponent
-            suiteTitle="Code"
-            logo={
-              <img
-                src={`${CDN_YDC_BASE}/images/extension/CodeSquareLogo.svg`}
-                alt="YouCode Logo"
-              />
-            }
-            selected={false}
-            handleOnClick={() => {
-              handleClick(YOUCODE_LINKAPP)
-            }}
-          />
-
-          <SuiteComponent
-            suiteTitle="Draw"
-            logo={
-              <img
-                src={`${CDN_YDC_BASE}/images/extension/DrawSquareLogo.svg`}
-                alt="YouCode Logo"
-              />
-            }
-            selected={false}
-            handleOnClick={() => {
-              handleClick(YOUDRAW_LINKAPP);
-            }}
-          />
-        </Styles.SuiteWrapper>
-
-        <Styles.SeparatorContainer>
-          <Styles.SeparationLine />
-          <Styles.SeparationText>Set your default search</Styles.SeparationText>
-          <Styles.SeparationLine />
-        </Styles.SeparatorContainer>
-
-        <Styles.AlternativeWrapper>
-          <Styles.AlternativeWrapperRow>
-            <Styles.YouComContainer>
-              <Styles.AlternativeButton
-                selected={selected === YOUALL}
-                onClick={() => {
-                  storeNewDefault(YOUALL);
-                  handleClick(YOUALL)
-                }}
-              >
-                <img
-                  src={`${CDN_YDC_BASE}/images/extension/YouComRoundLogo.svg`}
-                  alt="You Logo"
-                />
-                <Styles.AlternativeText selected={selected === YOUALL}>
-                  You.com
-                </Styles.AlternativeText>
-              </Styles.AlternativeButton>
-            </Styles.YouComContainer>
-            <Styles.YouChatContainer>
-              <Styles.AlternativeButton
-                selected={selected === YOUCHAT}
-                onClick={() => {
-                  storeNewDefault(YOUCHAT);
-                  handleClick(YOUCHAT);
-                }}
-              >
-                <img
-                  src={`${CDN_YDC_BASE}/images/extension/YouChatRoundLogo.svg`}
-                  alt="YouChat Logo"
-                />
-                <Styles.AlternativeText selected={selected === YOUCHAT}>
-                  YouChat
-                </Styles.AlternativeText>
-              </Styles.AlternativeButton>
-            </Styles.YouChatContainer>
-          </Styles.AlternativeWrapperRow>
-          <Styles.AlternativeWrapperRow>
-            <Styles.YouCodeContainer>
-              <Styles.AlternativeButton
-                selected={selected === YOUCODE}
-                onClick={() => {
-                  storeNewDefault(YOUCODE);
-                  handleClick(YOUCODE);
-                }}
-              >
-                <img
-                  src={`${CDN_YDC_BASE}/images/extension/YouCodeRoundLogo.svg`}
-                  alt="YouCode Logo"
-                />
-                <Styles.AlternativeText selected={selected === YOUCODE}>
-                  YouCode
-                </Styles.AlternativeText>
-              </Styles.AlternativeButton>
-            </Styles.YouCodeContainer>
-
-            <Styles.GoogleContainer>
-              <Styles.AlternativeButton
-                selected={selected === GOOGLE}
-                onClick={() => {
-                  storeNewDefault(GOOGLE);
-                  handleClick(GOOGLE);
-                }}
-              >
-                <img
-                  src={`${CDN_YDC_BASE}/images/extension/GoogleLogo.svg`}
-                  alt="Google Logo"
-                />
-                <Styles.AlternativeText selected={selected === GOOGLE}>
-                  Google
-                </Styles.AlternativeText>
-              </Styles.AlternativeButton>
-            </Styles.GoogleContainer>
-          </Styles.AlternativeWrapperRow>
-        </Styles.AlternativeWrapper>
-      </Styles.AppHeader>
-    </Styles.App>
+  return showApp ? (
+    <EmbedContainer>
+      {embedHeight === 0 && guestId && (
+        <LoadingContainer height={finalEmbedHeight}>
+          <LoadingImage src={youbot} alt="YouChat loading image" />
+          <LoadingComponentWithDots />
+        </LoadingContainer>
+      )}
+      <Embed
+        src={`${getEmbedHost()}/googlechat?q=${query}&gid=${guestId}&tbm=youchat`}
+        height={embedHeight}
+        onLoad={handleOnEmbedLoad}
+      />
+      <CloseIcon src={close} onClick={hideApp} />
+    </EmbedContainer>
+  ) : (
+    <></>
   );
 }
 

@@ -1,73 +1,12 @@
 /*global chrome*/
 
 chrome.runtime.onMessage.addListener((req) => {
-  const queries = [
-    "What+is+the+difference+between+AI+and+machine+learning",
-    "What+is+the+best+poem",
-    "What+is+the+capital+of+France",
-    "What+is+the+meaning+of+life",
-    "Tell+me+a+joke",
-    "How+can+I+learn+more+about+artificial+intelligence",
-    "How+can+I+get+started+with+coding",
-    "What+are+the+major+trends+in+the+tech+industry+right+now",
-    "Can+you+provide+a+brief+summary+of+a+recent+news+article",
-    "Write+a+sequel+about+forrest+gump+movie",
-    "Simple+ideas+to+decorate+my+home",
-    "Write+a+news+story+about+the+first+human+to+land+on+mars",
-    "Develop+rules+for+a+game+that+combines+monopoly+and+chess",
-    "Write+a+song+about+a+snake+and+a+mouse+that+are+friends+Eminem+style",
-    "Act+as+a+linux+terminal.+I+will+type+commands+and+you+will+reply+with+what+the+terminal+should+show",
-    "What+are+the+best+books+to+read+about+technology",
-  ];
+  const { domain, shouldOpenNewTab: _shouldOpenNewTab } = req;
 
-  const index = Math.floor(Math.random() * 100) % queries.length;
-
-  const { domain, shouldOpenNewTab } = req;
-
-  if (domain === "linkchat") {
+  if (domain === "extensionlink") {
     chrome.tabs.create({
-      url: "https://you.com/search?q=" + queries[index] + "&tbm=youchat",
+      url: "https://chrome.google.com/webstore/detail/youcom/afiglppdonkdbkkaghbnpklddbemkbpj",
     });
-  } else if (domain === "linkwrite") {
-    chrome.tabs.create({ url: "https://you.com/search?q=%40write" });
-  } else if (domain === "linkcode") {
-    chrome.tabs.create({ url: "https://you.com/search?q=%40code" });
-  } else if (domain === "linkdraw") {
-    chrome.tabs.create({ url: "https://you.com/search?q=%40draw" });
-  } else if (domain === "code") {
-    chrome.declarativeNetRequest.updateEnabledRulesets({
-      enableRulesetIds: ["ruleset_1"],
-      disableRulesetIds: ["ruleset_2", "ruleset_3", "ruleset_4"],
-    });
-    if (shouldOpenNewTab) {
-      chrome.tabs.create({ url: "https://code.you.com/" });
-    }
-  } else if (domain === "youchat") {
-    chrome.declarativeNetRequest.updateEnabledRulesets({
-      enableRulesetIds: ["ruleset_3"],
-      disableRulesetIds: ["ruleset_1", "ruleset_2", "ruleset_4"],
-    });
-    if (shouldOpenNewTab) {
-      chrome.tabs.create({
-        url: "https://you.com/search?q=" + queries[index] + "&tbm=youchat",
-      });
-    }
-  } else if (domain === "google") {
-    chrome.declarativeNetRequest.updateEnabledRulesets({
-      enableRulesetIds: ["ruleset_4"],
-      disableRulesetIds: ["ruleset_1", "ruleset_2", "ruleset_3"],
-    });
-    if (shouldOpenNewTab) {
-      chrome.tabs.create({ url: "https://www.google.com/" });
-    }
-  } else {
-    chrome.declarativeNetRequest.updateEnabledRulesets({
-      enableRulesetIds: ["ruleset_2"],
-      disableRulesetIds: ["ruleset_1", "ruleset_3", "ruleset_4"],
-    });
-    if (shouldOpenNewTab) {
-      chrome.tabs.create({ url: "https://you.com/" });
-    }
   }
 });
 
@@ -76,7 +15,10 @@ chrome.runtime.setUninstallURL("https://about.you.com/exit-survey");
 // https://developer.chrome.com/docs/extensions/reference/runtime/#event-onInstalled
 chrome.runtime.onInstalled.addListener((request) => {
   if (request.reason === chrome.runtime.OnInstalledReason.INSTALL) {
-    chrome.tabs.create({ active: true, url: "https://about.you.com/welcome/" });
+    chrome.tabs.create({
+      active: true,
+      url: "https://about.you.com/welcome/",
+    });
   }
 });
 
@@ -95,4 +37,23 @@ chrome.runtime.onMessageExternal.addListener(function (
     }
   }
   return true;
+});
+
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  // read changeInfo data and do something with it
+  // like send the new url to contentscripts.js
+  if (changeInfo.url) {
+    chrome.runtime.sendMessage({ msg: "activeTab", pageUrl: changeInfo.url });
+  }
+});
+
+chrome.runtime.onMessage.addListener((_req, _sender, sendResponse) => {
+  // query tabs to find an active tab
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    var activeTab = tabs[0];
+    var activeTabURL = activeTab.url;
+
+    chrome.runtime.sendMessage({ msg: "activeTab", pageUrl: activeTabURL });
+    sendResponse(activeTabURL);
+  });
 });
