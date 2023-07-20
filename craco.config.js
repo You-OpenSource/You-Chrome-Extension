@@ -13,7 +13,7 @@ module.exports = {
         },
         output: {
           ...webpackConfig.output,
-          filename: "static/js/[name]-[chunkhash].js",
+          filename: "static/js/[name].js",
         },
         optimization: {
           ...webpackConfig.optimization,
