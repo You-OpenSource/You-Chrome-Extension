@@ -101,6 +101,12 @@ export const YouChatContainer = styled.div`
   box-sizing: border-box;
 `;
 
+export const YouCodeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+`;
+
 export const YouComContainer = styled.div`
   display: flex;
   justify-content: center;
