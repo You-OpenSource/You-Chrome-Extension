@@ -2,11 +2,9 @@ import React from "react";
 
 import {
   YOUALL,
-  YOUCODE,
   YOUCHAT,
   GOOGLE,
   CDN_YDC_BASE,
-  YOUCODE_LINKAPP,
   YOUCHAT_LINKAPP,
   YOUWRITE_LINKAPP,
   YOUDRAW_LINKAPP,
@@ -18,9 +16,10 @@ import SuiteComponent from "./SuiteComponent/SuiteComponent";
 
 const handleClick = (domain: string, shouldOpenNewTab: boolean = true) => {
   chrome.runtime.sendMessage(chrome.runtime.id, {
-    domain:domain, shouldOpenNewTab: shouldOpenNewTab
+    domain: domain,
+    shouldOpenNewTab: shouldOpenNewTab,
   });
-}
+};
 
 function App() {
   const [selected, setSelected] = React.useState("");
@@ -65,7 +64,7 @@ function App() {
             }
             selected={false}
             handleOnClick={() => {
-              handleClick(YOUCHAT_LINKAPP)
+              handleClick(YOUCHAT_LINKAPP);
             }}
           />
 
@@ -84,25 +83,11 @@ function App() {
           />
 
           <SuiteComponent
-            suiteTitle="Code"
-            logo={
-              <img
-                src={`${CDN_YDC_BASE}/images/extension/CodeSquareLogo.svg`}
-                alt="YouCode Logo"
-              />
-            }
-            selected={false}
-            handleOnClick={() => {
-              handleClick(YOUCODE_LINKAPP)
-            }}
-          />
-
-          <SuiteComponent
             suiteTitle="Draw"
             logo={
               <img
                 src={`${CDN_YDC_BASE}/images/extension/DrawSquareLogo.svg`}
-                alt="YouCode Logo"
+                alt="YouDraw Logo"
               />
             }
             selected={false}
@@ -125,7 +110,7 @@ function App() {
                 selected={selected === YOUALL}
                 onClick={() => {
                   storeNewDefault(YOUALL);
-                  handleClick(YOUALL)
+                  handleClick(YOUALL);
                 }}
               >
                 <img
@@ -156,24 +141,6 @@ function App() {
             </Styles.YouChatContainer>
           </Styles.AlternativeWrapperRow>
           <Styles.AlternativeWrapperRow>
-            <Styles.YouCodeContainer>
-              <Styles.AlternativeButton
-                selected={selected === YOUCODE}
-                onClick={() => {
-                  storeNewDefault(YOUCODE);
-                  handleClick(YOUCODE);
-                }}
-              >
-                <img
-                  src={`${CDN_YDC_BASE}/images/extension/YouCodeRoundLogo.svg`}
-                  alt="YouCode Logo"
-                />
-                <Styles.AlternativeText selected={selected === YOUCODE}>
-                  YouCode
-                </Styles.AlternativeText>
-              </Styles.AlternativeButton>
-            </Styles.YouCodeContainer>
-
             <Styles.GoogleContainer>
               <Styles.AlternativeButton
                 selected={selected === GOOGLE}
