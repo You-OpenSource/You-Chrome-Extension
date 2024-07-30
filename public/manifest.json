@@ -16,18 +16,14 @@
   },
 
   "icons": {
-    "16": "icons/favicon-16x16.png",
-    "32": "icons/favicon-32x32.png",
-    "96": "icons/favicon-96x96.png",
-    "128": "icons/favicon-128x128.png",
-    "196": "icons/favicon-196x196.png"
+    "180": "icons/favicon-180x180.png"
   },
 
   "chrome_settings_overrides": {
     "search_provider": {
-      "name": "you.com",
+      "name": "You.com",
       "keyword": "you.com",
-      "search_url": "https://you.com/search?q={searchTerms}?chatMode=default&tbm=youchat&fromExtension=true",
+      "search_url": "https://you.com/search?q={searchTerms}&tbm=youchat&chatMode=default&fromExtension=true",
       "suggest_url": "https://you.com/api/ac?q={searchTerms}",
       "favicon_url": "https://you.com/favicon/favicon.ico",
       "encoding": "UTF-8",
