@@ -6,8 +6,6 @@ This Chrome extension sets [you.com](https://you.com/) as your default search en
 
 Download extension in the Chrome web store: https://chrome.google.com/webstore/detail/youcom-multi-engine-searc/fhplnehgjpmohhldfnjhibanpbiedofi
 
-![Extension](extension_image.png?raw=true)
-
 ### **Development Setup:**
 
 1. Download or clone this repo into a separate folder

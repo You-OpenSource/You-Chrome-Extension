@@ -1,5 +1,5 @@
 {
-  "name": "You.com: Default AI Search & Chat",
+  "name": "You.com: Default AI Search & Chat.",
   "manifest_version": 3,
   "version": "2.0.0",
   "description": "Experience the future of search with generative AI",
@@ -9,7 +9,6 @@
       "js": ["./static/js/content.js"]
     }
   ],
-  "permissions": ["declarativeNetRequestWithHostAccess", "storage"],
   "host_permissions": ["*://*/*"],
   "background": {
     "service_worker": "background.js"
@@ -22,7 +21,7 @@
   "chrome_settings_overrides": {
     "search_provider": {
       "name": "You.com",
-      "keyword": "you.com",
+      "keyword": "You.com",
       "search_url": "https://you.com/search?q={searchTerms}&tbm=youchat&chatMode=default&fromExtension=true",
       "suggest_url": "https://you.com/api/ac?q={searchTerms}",
       "favicon_url": "https://you.com/favicon/favicon.ico",
