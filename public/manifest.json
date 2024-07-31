@@ -1,63 +1,28 @@
 {
-  "name": "You.com | Search, chat, and create with AI",
+  "name": "You.com: Default AI Search & Chat",
   "manifest_version": 3,
-  "version": "0.0.0.6",
-  "description" : "Experience the future of search with generative AI",
-  "action": {
-    "default_popup": "index.html",
-    "default_title": "Open the popup"
-  },
+  "version": "2.0.0",
+  "description": "Personalized AI that makes you more productive, creative, and extraordinary",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["./static/js/content.js"]
     }
-  ], 
-  "declarative_net_request" : {
-    "rule_resources" : [
-        {
-        "id": "ruleset_1",
-        "enabled": false,
-        "path": "rules_1.json"
-        },
-        {
-          "id": "ruleset_2",
-          "enabled": true,
-          "path": "rules_2.json"
-        },
-        {
-          "id": "ruleset_3",
-          "enabled": false,
-          "path": "rules_3.json"
-        },
-        {
-          "id": "ruleset_4",
-          "enabled": false,
-          "path": "rules_4.json"
-        }
-      ]
-    },
-  "permissions": [
-    "declarativeNetRequestWithHostAccess", "storage"
-  ], 
-  "host_permissions": [
-  "*://*/*"
   ],
+  "host_permissions": ["*://*/*"],
   "background": {
     "service_worker": "background.js"
   },
 
   "icons": {
-      "16": "icons/favicon-16x16.png",
-      "48": "icons/favicon-48x48.png",
-      "128": "icons/favicon-128x128.png"
-    },
+    "180": "icons/favicon-180x180.png"
+  },
 
   "chrome_settings_overrides": {
     "search_provider": {
-      "name": "you.com",
-      "keyword": "you.com",
-      "search_url": "https://you.com/default/search?q={searchTerms}",
+      "name": "You.com",
+      "keyword": "You.com",
+      "search_url": "https://you.com/search?q={searchTerms}&tbm=youchat&chatMode=default&fromExtension=true",
       "suggest_url": "https://you.com/api/ac?q={searchTerms}",
       "favicon_url": "https://you.com/favicon/favicon.ico",
       "encoding": "UTF-8",
@@ -66,6 +31,6 @@
   },
 
   "externally_connectable": {
-      "matches": ["*://localhost/*", "*://you.com/*", "*://*.you.com/*"]
+    "matches": ["*://localhost/*", "*://you.com/*", "*://*.you.com/*"]
   }
 }
