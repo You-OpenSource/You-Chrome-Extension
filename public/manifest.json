@@ -2,7 +2,7 @@
   "name": "You.com: Default AI Search & Chat.",
   "manifest_version": 3,
   "version": "2.0.0",
-  "description": "Experience the future of search with generative AI",
+  "description": "Personalized AI that makes you more productive, creative, and extraordinary",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
