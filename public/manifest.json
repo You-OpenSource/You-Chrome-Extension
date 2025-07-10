@@ -1,7 +1,7 @@
 {
   "name": "You.com: Default AI Search & Chat",
   "manifest_version": 3,
-  "version": "2.0.0",
+  "version": "2.0.6",
   "description": "Personalized AI that makes you more productive, creative, and extraordinary",
   "content_scripts": [
     {
@@ -22,7 +22,7 @@
     "search_provider": {
       "name": "You.com",
       "keyword": "You.com",
-      "search_url": "https://you.com/search?q={searchTerms}&tbm=youchat&chatMode=default&fromExtension=true",
+      "search_url": "https://you.com/search?q={searchTerms}&fromExtension=true",
       "suggest_url": "https://you.com/api/ac?q={searchTerms}",
       "favicon_url": "https://you.com/favicon/favicon.ico",
       "encoding": "UTF-8",
