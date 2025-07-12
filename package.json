@@ -1,6 +1,6 @@
 {
   "name": "you-chrome-extension",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -39,7 +39,9 @@
     "typescript": "^4.9.5"
   },
   "overrides": {
+    "http-proxy-middleware": "^2.0.9",
     "serialize-javascript": "^6.0.2",
-    "postcss": "^8.4.31"
+    "postcss": "^8.4.31",
+    "webpack-dev-server": "^5.2.1"
   }
 }
