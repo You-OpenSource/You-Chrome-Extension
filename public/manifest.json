@@ -1,7 +1,7 @@
 {
   "name": "You.com | Search, chat, and create with AI",
   "manifest_version": 3,
-  "version": "0.0.0.6",
+  "version": "0.0.0.7",
   "description" : "Experience the future of search with generative AI",
   "action": {
     "default_popup": "index.html",
