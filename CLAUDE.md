@@ -59,6 +59,30 @@ If you encounter npm permission errors:
 sudo chown -R $(whoami) ~/.npm
 ```
 
+### Resolving Merge Conflicts
+When merging from upstream and encountering conflicts:
+
+1. **Fetch latest from upstream**:
+   ```bash
+   git fetch upstream main
+   ```
+
+2. **Merge upstream/main**:
+   ```bash
+   git merge upstream/main
+   ```
+
+3. **Resolve conflicts**:
+   - For `package-lock.json`: Remove the file and regenerate with `npm install`
+   - For source files: Manually resolve, keeping our fixes while incorporating upstream changes
+   - Always increment version number when resolving manifest.json conflicts
+
+4. **Add resolved files and commit**:
+   ```bash
+   git add <resolved-files>
+   git commit -m "Merge upstream/main and resolve conflicts"
+   ```
+
 ## File Structure
 
 - `public/background.js` - Background service worker, handles installation events
@@ -69,5 +93,6 @@ sudo chown -R $(whoami) ~/.npm
 
 ## Version History
 
-- 0.0.0.7 - Fixed 404 welcome page issue
+- 2.0.8 - Fixed 404 welcome page issue (updated from upstream 2.0.7)
+- 2.0.7 - Current upstream version with updated branding
 - 0.0.0.6 - Previous version with broken welcome URL
