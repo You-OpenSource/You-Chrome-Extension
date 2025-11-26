@@ -1,6 +1,6 @@
 /*global chrome*/
 
-chrome.runtime.setUninstallURL("https://about.you.com/exit-survey");
+chrome.runtime.setUninstallURL("https://you.com/home");
 
 // Let the you.com website detect whether the extension is installed
 // Source: https://stackoverflow.com/a/21043701
